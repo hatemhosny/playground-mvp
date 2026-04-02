@@ -1,5 +1,5 @@
 export interface Language {
-  name: "html" | "markdown" | "css" | "scss" | "javascript" | "typescript";
+  name: "html" | "markdown" | "typst" | "css" | "scss" | "javascript" | "typescript";
   title: string;
   longTitle: string;
   editorId: "markup" | "style" | "script";

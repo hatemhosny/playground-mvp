@@ -1,16 +1,7 @@
 const markedUrl = "https://esm.sh/marked";
 const sassUrl = "https://esm.sh/sass";
 const typescriptUrl = "https://esm.sh/typescript";
-const loadTypst = () => new Promise((resolve, reject) => {
-if (window.$typst) return resolve();
-const script = document.createElement('script');
-script.type = 'module';
-script.src = 'https://cdn.jsdelivr.net/npm/@myriaddreamin/typst-all-in-one.ts@0.6.0/dist/esm/index.js';
-script.id = 'typst';
-script.addEventListener('load', resolve);
-script.addEventListener('error', reject);
-document.head.appendChild(script);
-});
+const typstUrl = "https://cdn.jsdelivr.net/npm/@myriaddreamin/typst-all-in-one.ts@0.6.0/dist/esm/index.js";
 
 /**
  * @type {import("./types").Language[]}
@@ -73,11 +64,8 @@ export const languages = [
     longTitle: "typst",
     editorId: "markup",
     compiler: async () => {
-      await loadTypst();
-      return async (code) => {
-      const svg = await $typst.svg({mainContent: code});
-      return svg;
-      };
+      const { $typst } = await import(typstUrl);
+      return async (code) => $typst.svg({mainContent: code});
     },
   },
 ];
