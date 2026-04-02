@@ -76,11 +76,6 @@ const loadMenus = () => {
 };
 
 const getResult = ({ html, css, js }) => {
-  const isTypst = html.trimStart().startsWith('<svg');
-  if (isTypst) {
-    return `<html><body style="margin:0">${html}</body></html>`;
-  }
-
   const importmapScript = hasImports(js)
     ? createImportMapScript(createImportMap(getImports(js)))
     : "";

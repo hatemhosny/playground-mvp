@@ -75,11 +75,8 @@ export const languages = [
     compiler: async () => {
       await loadTypst();
       return async (code) => {
-        const svg = await $typst.svg({mainContent: code});
-          console.log(svg);
-          console.log(typeof(svg));
-        console.log(`rendered! SvgElement { len: ${svg.length} }`);
-        return svg;
+      const svg = await $typst.svg({mainContent: code});
+      return svg;
       };
     },
   },
