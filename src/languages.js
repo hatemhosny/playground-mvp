@@ -1,6 +1,7 @@
 const markedUrl = "https://esm.sh/marked";
 const sassUrl = "https://esm.sh/sass";
 const typescriptUrl = "https://esm.sh/typescript";
+const typstUrl = "https://cdn.jsdelivr.net/npm/@myriaddreamin/typst-all-in-one.ts@0.6.0/dist/esm/index.js";
 
 /**
  * @type {import("./types").Language[]}
@@ -55,6 +56,16 @@ export const languages = [
     compiler: async () => {
       const ts = await import(typescriptUrl);
       return (code) => ts.transpile(code);
+    },
+  },
+  {
+    name: "typst",
+    title: "ty",
+    longTitle: "typst",
+    editorId: "markup",
+    compiler: async () => {
+      const { $typst } = await import(typstUrl);
+      return async (code) => $typst.svg({mainContent: code});
     },
   },
 ];
